@@ -1,6 +1,5 @@
-# kill process killmenow
-
+# execute pkill command to kill bashscript file killmenow
 exec { 'pkill':
-  command  => 'pkill killmenow',
-  provider => 'shell',
+  command => 'pkill -9 -f killmenow',
+  path    => ['/usr/bin', '/usr/sbin', '/bin']
 }
