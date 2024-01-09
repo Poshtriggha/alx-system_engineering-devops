@@ -1,32 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Customizing a 404-error_page
 
+# Updating Packages before performing installations
 sudo apt-get update
 sudo apt-get install -y nginx
 
-echo "03-web-02" | sudo tee /etc/hostname
-sudo hostnamectl set-hostname 03-web-02
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo bash -c 'cat > /etc/nginx/sites-available/default' <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+# Performing a "moved permanently redirection" (301)
+new_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/besthor permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
 
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+# Creating a 404 Custom error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
 
-    server_name _;
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
+# Creating an HTTP response header
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
-    add_header X-Served-By \$hostname;
+# Testing configurations for syntax errors
+sudo nginx -t
 
-    # Additional configurations...
-}
-EOF
-
-sudo systemctl reload nginx
-
-curl -sI localhost | grep X-Served-By
-
+# Restart nginx after implementing changes
+sudo service nginx restart
