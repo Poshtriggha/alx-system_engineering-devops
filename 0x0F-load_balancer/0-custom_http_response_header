@@ -1,0 +1,32 @@
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "03-web-02" | sudo tee /etc/hostname
+sudo hostnamectl set-hostname 03-web-02
+
+sudo bash -c 'cat > /etc/nginx/sites-available/default' <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    add_header X-Served-By \$hostname;
+
+    # Additional configurations...
+}
+EOF
+
+sudo systemctl reload nginx
+
+curl -sI localhost | grep X-Served-By
+
