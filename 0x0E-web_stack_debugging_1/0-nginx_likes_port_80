@@ -29,3 +29,12 @@ if ! netstat -lnt | grep ":80 "; then
 else
   echo "Nginx is already listening on port 80."
 fi
+
+# Verify Nginx response on port 80
+nginx_response=$(curl -s -I 0:80 | head -n 1)
+
+if [[ "$nginx_response" == *"200 OK"* ]]; then
+  echo "Nginx returned a web page with HTTP 200 on port 80."
+else
+  echo "Error: Nginx did not return the expected response on port 80."
+fi
