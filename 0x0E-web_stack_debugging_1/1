@@ -1,0 +1,34 @@
+Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:6 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [1,459 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [3,770 kB]
+Fetched 5,343 kB in 9s (588 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 253 not upgraded.
+Need to get 196 kB of archives.
+After this operation, 864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 196 kB in 1s (362 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 76724 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Processing triggers for man-db (2.9.1-1) ...
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+Nginx is not running. Starting Nginx...
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp6       0      0 :::80                   :::*                    LISTEN     
+Nginx is already listening on port 80.
