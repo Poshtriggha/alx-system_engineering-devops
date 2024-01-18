@@ -5,17 +5,19 @@ apt-get update
 apt-get install -y net-tools
 systemctl start nginx
 
-if ! netstat -lnt | grep ":80 "; then
+if ! netstat -lnt | grep -q ":80 "
+then
   sed -i '/listen 80 default_server;/c\    listen 80 default_server;' /etc/nginx/sites-available/default
   systemctl reload nginx
 fi
 
-if ! curl -sI 0:80 | grep "200 OK"
+if ! curl -sI 0:80 | grep -q "200 OK"
 then
   echo "Error: Nginx is not running on port 80."
 fi
 
-if ! service nginx status | grep "not running"
+if ! service nginx status | grep -q "not running"
 then
   echo "service (init) says that nginx is not running."
 fi
+
