@@ -1,40 +1,7 @@
 #!/usr/bin/env bash
+# Configures an Nginx server to listen on port 80.
 
-# Install necessary tools
-apt-get update
-apt-get install -y net-tools
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
 
-# Check Nginx status and current configuration
-nginx_status=$(systemctl is-active nginx)
-nginx_config="/etc/nginx/sites-available/default"
-
-if [ "$nginx_status" != "active" ]; then
-  echo "Nginx is not running. Starting Nginx..."
-  systemctl start nginx
-else
-  echo "Nginx is already running."
-fi
-
-# Check if Nginx is listening on port 80
-if ! netstat -lnt | grep ":80 "; then
-  echo "Nginx is not listening on port 80. Updating configuration..."
-
-  # Update Nginx configuration to listen on port 80
-  sed -i '/listen 80 default_server;/c\    listen 80 default_server;' $nginx_config
-
-  # Reload Nginx to apply changes
-  systemctl reload nginx
-
-  echo "Nginx configuration updated. Now listening on port 80."
-else
-  echo "Nginx is already listening on port 80."
-fi
-
-# Verify Nginx response on port 80
-nginx_response=$(curl -s -I 0:80 | head -n 1)
-
-if [[ "$nginx_response" == *"200 OK"* ]]; then
-  echo "Nginx returned a web page with HTTP 200 on port 80."
-else
-  echo "Error: Nginx did not return the expected response on port 80."
-fi

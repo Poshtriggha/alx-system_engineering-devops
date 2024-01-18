@@ -1,21 +1,2 @@
-Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
-Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
-Hit:3 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
-Get:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
-Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
-Fetched 114 kB in 5s (23.7 kB/s)
-Reading package lists...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-net-tools is already the newest version (1.60+git20180626.aebd88e-1ubuntu1).
-0 upgraded, 0 newly installed, 0 to remove and 253 not upgraded.
-System has not been booted with systemd as init system (PID 1). Can't operate.
-Failed to connect to bus: Host is down
-Nginx is not running. Starting Nginx...
-System has not been booted with systemd as init system (PID 1). Can't operate.
-Failed to connect to bus: Host is down
-tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
-tcp6       0      0 :::80                   :::*                    LISTEN     
-Nginx is already listening on port 80.
-Nginx returned a web page with HTTP 200 on port 80.
+ * Restarting nginx nginx
+   ...done.
