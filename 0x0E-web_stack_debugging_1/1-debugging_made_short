@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# This script installs necessary tools, starts Nginx, configures it to listen on port 80, and verifies its status.
-
-apt-get update
-apt-get install -y net-tools
-systemctl start nginx
-netstat -lnt | grep ":80 " || sed -i '/listen 80 default_server;/c\    listen 80 default_server;' /etc/nginx/sites-available/default && systemctl reload nginx
-curl -sI 0:80 | grep "200 OK" && echo "Nginx is running on port 80." || echo "Error: Nginx is not running on port 80."
+# Configures an Nginx server to listen on port 80.
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx start
+kill "$(pgrep 'nginx' | head -1)”
