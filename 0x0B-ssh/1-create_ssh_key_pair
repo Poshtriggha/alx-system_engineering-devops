@@ -1,25 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Creates RSA key pair
 
-# Define the key file name
-private_key_file="school"
-
-# Check if the private key file already exists
-if [ -e "$private_key_file" ]; then
-  echo "Private key file '$private_key_file' already exists. Aborting."
-  exit 1
-fi
-
-# Prompt for passphrase
-read -s -p "Enter passphrase for the private key: " passphrase
-echo
-
-# Generate RSA key pair with 4096 bits and the provided passphrase
-openssl genpkey -algorithm RSA -out "$private_key_file" -aes256 -pass "pass:$passphrase" -aes-256-cbc -param_enc explicit
-
-# Check if key generation was successful
-if [ $? -eq 0 ]; then
-  echo "RSA key pair successfully generated and stored in '$private_key_file'."
-else
-  echo "Error generating RSA key pair. Please check your inputs and try again."
-fi
-
+ssh-keygen -t rsa -b 4096 -P betty -f school
