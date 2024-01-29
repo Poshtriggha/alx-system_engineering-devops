@@ -1,10 +1,25 @@
 #!/usr/bin/python3
+"""
+Using what you did in the task #0, extend your Python script to export data in the CSV format.
+
+Requirements:
+
+Records all tasks that are owned by this employee
+Format must be: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
+File name must be: USER_ID.csv
+
+"""
 
 import requests
 import sys
 import csv
 
 def get_employee_todo_progress(employee_id):
+    """
+    Fetches and exports employee TODO list progress in CSV format.
+
+    :param employee_id: Employee ID (integer)
+    """
     base_url = "https://jsonplaceholder.typicode.com/"
     user_url = f"{base_url}users/{employee_id}"
     todos_url = f"{base_url}todos"
@@ -47,4 +62,3 @@ if __name__ == "__main__":
 
     employee_id = int(sys.argv[1])
     get_employee_todo_progress(employee_id)
-
