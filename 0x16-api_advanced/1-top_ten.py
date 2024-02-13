@@ -1,6 +1,12 @@
 #!/usr/bin/python3
+"""
+Module to query the Reddit API and print the titles of the first 10 hot posts for a given subreddit.
+"""
 
 import requests
+
+# Replace the placeholder with your custom user agent
+custom_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.62"
 
 def top_ten(subreddit):
     """
@@ -13,7 +19,7 @@ def top_ten(subreddit):
         None
     """
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.62"}  # Add a custom User-Agent to avoid Too Many Requests errors
+    headers = {"User-Agent": custom_user_agent}
 
     try:
         response = requests.get(url, headers=headers)
@@ -43,3 +49,4 @@ if __name__ == "__main__":
     else:
         subreddit = sys.argv[1]
         top_ten(subreddit)
+
