@@ -11,11 +11,10 @@ def number_of_subscribers(subreddit):
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code == 404:
         return 0
-    try:
-        results = response.json()["data"]
-        return results["subscribers"]
-    except KeyError:
-        return 0
+    results = response.json().get("data")
+    
+    # Add a return statement to return the number of subscribers
+    return results.get("subscribers", 0)
 
 # Example usage:
 subreddit_name = "python"
