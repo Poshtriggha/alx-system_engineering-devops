@@ -1,52 +1,22 @@
 #!/usr/bin/python3
-"""
-Module to query the Reddit API and print the titles of the first 10 hot posts for a given subreddit.
-"""
-
+"""Function to print hot posts on a given Reddit subreddit."""
 import requests
 
-# Replace the placeholder with your custom user agent
-custom_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.62"
 
 def top_ten(subreddit):
-    """
-    Function to print the titles of the first 10 hot posts for a given subreddit.
-
-    Args:
-        subreddit (str): The name of the subreddit.
-
-    Returns:
-        None
-    """
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {"User-Agent": custom_user_agent}
-
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Raise an exception for bad responses (e.g., 404 Not Found)
-        data = response.json()
-
-        # Check if the subreddit is valid and has posts
-        if 'data' in data and 'children' in data['data']:
-            posts = data['data']['children'][:10]  # Get the first 10 posts
-            for post in posts:
-                print(post['data']['title'])
-        else:
-            print("None")  # Invalid subreddit or no posts
-    except requests.exceptions.HTTPError as e:
-        if response.status_code == 404:
-            print(f"Subreddit '{subreddit}' not found.")
-        else:
-            print(f"Error: {e}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-
-if __name__ == "__main__":
-    import sys
-
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        top_ten(subreddit)
+    """Print the titles of the 10 hottest posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    headers = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+    }
+    params = {
+        "limit": 10
+    }
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+    if response.status_code == 404:
+        print("None")
+        return
+    results = response.json().get("data")
+    [print(c.get("data").get("title")) for c in results.get("children")]
 
