@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+# This is a sample Nginx configuration script for a web server.
+
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
